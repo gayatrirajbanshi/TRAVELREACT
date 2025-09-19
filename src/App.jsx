@@ -1,0 +1,83 @@
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
+import LandingPage from "./pages/LandingPage"
+import useAuth from "./hooks/useAuth"
+import Dashboard from "./pages/Dashboard"
+import { jwtDecode } from "jwt-decode"
+import Trips from "./pages/Trips"
+import AddTrip from "./pages/AddTrip"
+import AppLayout from "./components/layout/AppLayout"
+import Itinerary from "./pages/Itinerary"
+import ItineraryPage from "./pages/Itinerary"
+import AddItinerary from "./pages/AddItinerary"
+import EditTrip from "./pages/EditTrip"
+
+import TripInfo from "./pages/TripInfo"
+import EditItinerary from "./pages/EditItinerary"
+import PackingPage from "./pages/Packing"
+
+
+function App() {
+
+  const { token, logout } = useAuth();
+  
+  const ProtectedRoutes = () => {
+    try {
+      const decodedToken = token ? jwtDecode(token) : null;
+      const userId = decodedToken?.userId;
+
+
+      if (decodedToken && decodedToken.exp) {
+        const currentTime = Date.now() / 1000;
+        if (currentTime > decodedToken?.exp) {
+          logout();
+          return <Navigate to="/login" />;
+        }
+      }
+
+
+      if (!token || !userId) {
+        logout();
+        return <Navigate to= "/login"/>;
+      }
+       return <AppLayout />;
+    } catch (err) {
+      console.error(err);
+      logout();
+      return <Navigate to="/login" />;
+    }
+
+    };  
+
+    
+  return (
+   <BrowserRouter>
+   <Routes>
+     
+      <Route path="/" element={<LandingPage/>}/>
+      <Route path="/login" element={<Login />}/>
+      <Route path="/signup" element={<Signup />}/>
+
+      <Route element={<ProtectedRoutes/>}>
+
+      <Route path="/dashboard" element={<Dashboard />}/>
+
+     <Route path="/trips" element={<Trips/>}/>
+     <Route path="/trips/add" element={<AddTrip/>}/>
+     <Route path="/trips/edit/:id" element={<EditTrip/>}/>
+     <Route path="/trips/:id" element={<TripInfo/>}/>
+
+       <Route path="/packing" element={<PackingPage/>} />
+
+     
+     <Route path="/itineraries" element={<ItineraryPage/>}/>
+     <Route path="/itineraries/add" element={<AddItinerary/>}/>
+     <Route path="/itineraries/edit:id" element={<EditItinerary/>}/>
+     </Route>
+   </Routes>
+   </BrowserRouter>
+  )
+}
+
+export default App
