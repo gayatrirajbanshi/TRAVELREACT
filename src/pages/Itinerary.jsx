@@ -42,8 +42,8 @@ export default function ItineraryPage() {
             <div className="container mx-auto px-20 py-8">
                 {/* Page Header */}
                 <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900 mb-2">Packing Lists</h1>
-                    <p className="text-gray-600">Organize and track your travel essentials</p>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-2">Itineraries</h1>
+                    <p className="text-gray-600">Manage your trip destination and date.</p>
                 </div>
 
                   {/* Trip Selection */}

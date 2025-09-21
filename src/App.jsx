@@ -8,14 +8,17 @@ import { jwtDecode } from "jwt-decode"
 import Trips from "./pages/Trips"
 import AddTrip from "./pages/AddTrip"
 import AppLayout from "./components/layout/AppLayout"
-import Itinerary from "./pages/Itinerary"
+
 import ItineraryPage from "./pages/Itinerary"
 import AddItinerary from "./pages/AddItinerary"
 import EditTrip from "./pages/EditTrip"
 
 import TripInfo from "./pages/TripInfo"
 import EditItinerary from "./pages/EditItinerary"
+
+import AcceptInvitation from "./hooks/AcceptInvitation"
 import PackingPage from "./pages/Packing"
+
 
 
 function App() {
@@ -66,9 +69,10 @@ function App() {
      <Route path="/trips" element={<Trips/>}/>
      <Route path="/trips/add" element={<AddTrip/>}/>
      <Route path="/trips/edit/:id" element={<EditTrip/>}/>
+     <Route path="/trips/:id/inivite/accept" element={<AcceptInvitation />} />
      <Route path="/trips/:id" element={<TripInfo/>}/>
 
-       <Route path="/packing" element={<PackingPage/>} />
+     <Route path="/packing" element={<PackingPage/>} />
 
      
      <Route path="/itineraries" element={<ItineraryPage/>}/>

@@ -6,12 +6,13 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Calendar, MapPin, DollarSign, Plus, Trash2, Plane, Receipt, Badge, Clock, StickyNote, X } from "lucide-react"
+import { Calendar, MapPin, DollarSign, Plus, Trash2, Plane, Receipt, Clock, StickyNote, X } from "lucide-react"
 
 import api from "@/api/axios"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import EditItinerary from "@/pages/EditItinerary"
+
 import { toast } from "sonner"
+import { Badge } from "../ui/badge"
 
 const activitySchema = z.object({
   name: z.number().min(0, "Total budget must be 0 or greater"),
@@ -40,6 +41,7 @@ export function ItineraryForm({
     const navigate = useNavigate();
 
   const form = useForm({
+
     resolver: zodResolver(itinerarySchema),
     defaultValues: initialData || {
       title: "",
@@ -57,6 +59,7 @@ export function ItineraryForm({
   })
 
   const onSubmit = async (data) => {
+    console.log(data)
         try {
             const response = await api.post(`/itineraries/${tripId}`, data);
             console.log(response)
@@ -72,11 +75,11 @@ export function ItineraryForm({
         }
     }
 
-    const EditItinerary = async (data) => {
+    const editItinerary = async (data) => {
       try{
         const response = await api.patch(`/itineraries/${trip}/${initialData._id}`,data);
         if (response.data._id) {
-          toast.sucess("Itinerary updated successfully!");
+          toast.success("Itinerary updated successfully!");
           navigate(`/itineraries`);
         } else {
           toast.error("Failed to update itinerary");
@@ -113,7 +116,7 @@ export function ItineraryForm({
 
     <Form {...form}>
       <form onSubmit={form.handleSubmit(
-        initialData? EditItinerary : onSubmit
+        initialData? editItinerary : onSubmit
       )}  className="space-y-6">
         {/* Basic Information */}
         <Card>
@@ -264,6 +267,7 @@ function ActivityCard({
             </FormItem>
 
         )}
+
         />
          <FormField
           control={form.control}

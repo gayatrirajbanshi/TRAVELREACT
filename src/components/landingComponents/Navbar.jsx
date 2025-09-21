@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <header className='flex items-center justify-between py-2 px-8 border-b'>
     <div className='flex items-center gap-4'>
-    <img src ="/vite.svg" alt="logo"/>
+    <img src ="/vite.svg" alt="logo" className='h-10 w-10'/>
     <h1 className='text-2xl font-bold'>Wander Wise</h1>
    </div>
 

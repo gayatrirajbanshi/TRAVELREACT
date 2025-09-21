@@ -1,4 +1,4 @@
-"use client"
+
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -19,6 +19,7 @@ import useAuth from "@/hooks/useAuth"
 import { useNavigate } from "react-router-dom"
 import { registerUser } from "@/api/auth"
 
+
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Username must be at least 2 characters.",
@@ -27,23 +28,25 @@ const formSchema = z.object({
     message:"Email must be strong and unique",
   }),
 
-  password: z.string().min(8, {message: "Password must be at least 5 characters."}), 
+  password: z.string().min(5, {
+    message: "Password must be at least 5 characters."}), 
   
-  confirmPassword:z.string().min(8,{ message:"Password must be at least 5 characters.",
+  confirmPassword:z.string().min(5,{
+     message:"Password must be at least 5 characters.",
 
-  })
+  }),
   }) 
 
   .refine((data)=> data.password === data.confirmPassword, {
      message:"Passwords do not match",
     path:["confirmPassword"],
-  })
+  });
 
 
 
 
 
-export default function Signup() {  
+export default function Signup() {    
   // ...
   const {login}= useAuth();
   const navigate = useNavigate();
@@ -58,6 +61,7 @@ export default function Signup() {
   })
 
   const {token} =useAuth();
+
   if(token){
     navigate("/dashboard");
   }
@@ -69,7 +73,7 @@ export default function Signup() {
        const response = await registerUser({ name, email, password})
         
        if(response.token){
-        login({name,email}, response.token)
+        login({name,email}, response.token);
         navigate("/dashboard");
        }
        else{
@@ -94,6 +98,7 @@ export default function Signup() {
             <img src="/logo.png" alt="wander wise" className="w-10 h-10" />
             </div>
         <h1 className="text-2xl font bold mb-6"> Register to WanderWise</h1>
+
         <FormField
           control={form.control}
           name="name"
@@ -156,8 +161,8 @@ export default function Signup() {
         <Button type="submit" className="w-full">Submit</Button >
         
         <p className="text-sm text-center text-gray-500 mt-2">
-          Already have an account?
-          <a href=" Login" class="underline hover:text-blue-500">
+          Already have an account?{" "}
+          <a href="/Login" class="underline hover:text-blue-500">
             Login</a>
             </p>
         

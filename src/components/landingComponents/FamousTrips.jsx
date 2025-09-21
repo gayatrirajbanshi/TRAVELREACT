@@ -22,7 +22,7 @@ import { Button } from '../ui/button'
            {
             famousTrips.map((trip)=> {
                 return (
-                <Card key={trip.place} className="text-center">
+                <Card key={trip.place} >
                 <CardHeader>
                     <div className='h-60 w-full overflow-hidden'>
                         <img src={trip.image} alt={trip.place} className='h-full w-full'/>
@@ -41,7 +41,9 @@ import { Button } from '../ui/button'
                     </CardDescription>    
                 </CardContent>
                 <CardFooter>
-                    <Button className={"w-full"}> View Details</Button>
+                    <Button className={"w-full"}>
+                         View Details
+                         </Button>
                 </CardFooter>
             </Card>
 

@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent} from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
@@ -23,14 +23,14 @@ export default function PackingPage() {
 
     const [selectedTripId, setSelectedTripId] = useState("");
 
-    const [searchParam] = useSearchParams();
+    const [searchParams] = useSearchParams();
 
      useEffect(() => {
             const tripId = searchParams.get("tripId");
             if (tripId) {
                 setSelectedTripId(tripId);
             }
-        }, [searchParam]);
+        }, [searchParams]);
     
     
 

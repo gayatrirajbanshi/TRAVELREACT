@@ -1,4 +1,6 @@
 import UserTrips from '@/components/dashboardComponents/UserTrips'
+import { Button } from '@/components/ui/button'
+import { Plus } from 'lucide-react'
 import React from 'react'
 
 const Trips = () => {
@@ -9,7 +11,15 @@ const Trips = () => {
       <h1 className='text-3xl font-boldmb-2'>Your Trip</h1>
       <p className='text-sm text-gray-400 mb-6'>Manage and Explore your travel Adventure with wander wise</p>
     </div>
-    <div>Trips</div>
+    <div>
+      <a href="/trips/add">
+      <Button>
+        <Plus className='mr-2 h-4 w-4'/>
+        Add new Trip
+      </Button>
+      
+      </a>
+      </div>
     <UserTrips/>
     </main>
   )

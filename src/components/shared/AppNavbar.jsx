@@ -8,8 +8,8 @@ const AppNavbar = () => {
   return (
     <header className='flex items-center justify-between py-2 px-8 border-b'>
     <div className='flex items-center gap-4'>
-    <img src ="/vite.svg" alt="logo"/>
-    <h1>Wander Wise</h1>
+    <img src ="/vite.svg" alt="logo" className='h-10 w-10'/>
+    <h1 className='text-2xl font-bold'>Wander Wise</h1>
    </div>
 
    <div className='flex gap-10'>
@@ -21,11 +21,11 @@ const AppNavbar = () => {
         <NavLink to="/packing list" className={({isActive})=> isActive ? 'text-primary font-semibold underline': ''}>Packing List</NavLink>
      </nav>
      <div> 
-       <Button variant="outline" onclick={logout}> Logout</Button>
+       <Button variant="outline" onClick={logout}> Logout</Button>
     </div>
    </div>
   </header>
-  ) 
+  )   
 }
 
 export default AppNavbar

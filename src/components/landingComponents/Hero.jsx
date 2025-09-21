@@ -4,7 +4,6 @@ import { Button } from '../ui/button'
 const Hero = () => {
   return (
     <section className='relative flex items-center justify-center text-white'>
-
         <div className='absolute top-0 left-0 w-full h-full -z-20'>
             <img src="https://www.bugbog.com/wp-content/uploads/2024/11/48a8e990c7e3a541/budget-travel-destinations.jpeg" alt="background" className='w-full h-full'/>
         </div>
@@ -17,7 +16,7 @@ const Hero = () => {
                 Explore the world with wander wise
             </h1>
 
-            <p className='text-white'>
+            <p className='text-white px-20 text-lg'>
                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, aliquam ea! Facilis veritatis ea et harum assumenda mollitia, voluptatem eaque exercitationem ducimus, fugit eveniet aliquam repudiandae vel, sed quam vitae.
 
             </p>

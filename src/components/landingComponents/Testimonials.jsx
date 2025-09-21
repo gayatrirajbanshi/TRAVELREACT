@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card'
 import {  testimonials } from '@/lib/constants'
 import { Button } from '../ui/button'
+import { Quote, Star } from 'lucide-react'
 // import { BookmarkCheck } from 'lucide-react'
 
  const Testimonials = () => {
@@ -16,44 +17,30 @@ import { Button } from '../ui/button'
         </div>
         <div className=' grid  md:grid-cols-1 lg:grid-cols-4 gap-8'>
 
-           {
-            testimonials.map((testi)=> {
-                return (
+           { testimonials.map((testi)=> (
+                
                 <Card key={testi.name} className="text-center ">
-                
-                <CardHeader>
-                    
-                    <div className='flex gap-4 p-8  mx-4 rounded-xl'>
-                    
-                        <img src={testi.image} alt= '' className='h-16 w-16 rounded-full'/>
-                        <p className='text-xl text-start font-bold mb-2 text-black/80'>{testi.name}</p>
-                     </div>
-                </CardHeader>
-                <CardContent>
-                    
-                <CardDescription className={"flex items-start justify-between"} >
-                   {/* {/* <p className='text-lg text-gray-600'>
-                    {testi.day} days
-                   </p> */}
-                   {
-                   <p className='text-lg font-bold text-black-700'>
-                    {testi.review} 
-                   </p> }
-                
-                    </CardDescription>    
-                </CardContent>
-                 
-                <CardFooter>
-                    {/* <Button className={"w-full"}> View Details</Button> */}
-                    <p>⭐⭐⭐⭐⭐</p>
-                </CardFooter>
-                
+                <CardContent className="px-6 py-2">
+                    <Quote className="h-8 w-8 text-primary mb-4"/>
+                    <p className="text-gray-600 mb-4 italic">"{testi.text}"</p>
+                    <div className='flex items-center'>
+                        <div>
+                          <h4 className="font-semibold text-sm">{testi.name}</h4>
+                           <p className="text-xs text-gray-500">{testi.location}</p>
+                      <div className="flex mt-1">
+                        {[...Array(testi.rating)].map((_, i) => (
+                          <Star key={i} className="h-3 w-3 text-yellow-400 fill-current" />
+                        ))}
+                        </div>
+                        </div>
+                        </div>
+                        
+                </CardContent>  
             </Card>
              
 
-                )
-            })  
-        }   
+                ) )} 
+        
 
         </div>
         </div>

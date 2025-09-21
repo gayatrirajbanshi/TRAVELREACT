@@ -6,7 +6,7 @@ import { features } from '@/lib/constants'
  const Features = () => {
   return (
     <section className='py-20 px-10' id='features'>
-        <div className='container mx-auto px-4'></div>
+        <div className='container mx-auto px-4'>
 
         {/* heading */}
         <div className='text-center mb-12'>
@@ -38,6 +38,7 @@ import { features } from '@/lib/constants'
         }   
 
 
+        </div>
         </div>
 
     </section>

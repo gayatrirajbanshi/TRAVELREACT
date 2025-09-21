@@ -20,6 +20,7 @@ import {
     Download,
     Clock,
     Target,
+    User,
 } from "lucide-react"
 import AddExpense from '@/components/trips/AddExpense';
 import AddCollaboraters from '@/components/trips/InviteCollabrator';
@@ -266,13 +267,13 @@ const TripInfo = () => {
                                             <h3 className="text-lg font-semibold">Collaborators</h3>
                                         </div>
                                         <div className="flex flex-wrap gap-3">
-                                            {trip.collaborators.map((email, index) => (
+                                            {trip.collaborators.map((id, index) => (
                                                 <div key={index} className="flex items-center space-x-2 p-2 bg-gray-50 rounded-lg">
-                                                    <Avatar className="h-8 w-8">
-                                                        <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${email}`} />
-                                                        <AvatarFallback>{email.charAt(0).toUpperCase()}</AvatarFallback>
-                                                    </Avatar>
-                                                    <span className="text-sm">{email}</span>
+                                                   <div className='p-2 bg-amber-400 rounded-full'>
+                                                    <User className='h-4 w-4 '/>
+
+                                                    </div>
+                                                    <span className="text-sm">{id}</span>
                                                 </div>
                                             ))}
                                         </div>

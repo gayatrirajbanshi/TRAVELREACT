@@ -43,6 +43,10 @@ export default function Login() {
 
     const {token} =useAuth();
 
+    if(token){
+      navigate("/dashboard");
+    }
+
     async function onSubmit(data) {
         const { email, password } = data;
         try{
@@ -51,7 +55,7 @@ export default function Login() {
 
         // TODO: when user is logged in, return user data along with token from backend 
         if(response.token){
-          console.log(response.token)
+          // console.log(response.token)
             login({ email }, response.token);
             navigate("/dashboard");
         }
@@ -112,7 +116,7 @@ export default function Login() {
         <p className="text-sm text-center text-gray-500 mt-2">
             Create a new account?{" "}
             <a href="/signup" className="text-primary hover:underline">
-                Register
+                signup
             </a>
         </p>
       </form>
