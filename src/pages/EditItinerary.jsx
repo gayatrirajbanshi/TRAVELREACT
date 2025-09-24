@@ -1,4 +1,5 @@
-import { ItineraryForm } from '@/components/itineraryComponents/ItineraryForm'
+
+import { ItineraryForm } from '@/components/ItineraryComponents/ItineraryForm.jsx';
 import Loading from '@/components/shared/Loading';
 import useApi from '@/hooks/useApi';
 import React from 'react'
