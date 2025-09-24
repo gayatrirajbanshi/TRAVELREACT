@@ -48,9 +48,9 @@ const AddFile= ({ tripId,dependency,setDependency }) => {
             // }
         } catch (error) {
             console.error('Error adding files:', error);
-            toast.error("An error occurred while adding expense");
+            toast.error("An error occurred while adding file");
         }
-    }
+    };
 
     return (
         <Form {...form}>

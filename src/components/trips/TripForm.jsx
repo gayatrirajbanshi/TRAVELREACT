@@ -67,13 +67,13 @@ export function TripForm({ initialData }) {
 
   const onSubmit = async (data) => {
 
-    try {
+    try { 
         const response = await api.post('/trips', data);
         console.log(response)
         if (response.data._id){
             toast.success("Trip created successfully");
-            navigate(`/trips/${response._id}`);
-        }else{
+            navigate(`/trips/${response.data._id}`);   
+        }else{                      
             
             toast.error("Failed to create trip")
         }

@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import api from '@/api/axios';
 import Loading from '@/components/shared/Loading';
 import { Button } from '@/components/ui/button'
-import useApi from '@/hooks/useApi';
-import { useNavigate, useParams } from 'react-router-dom';
+
 import { toast } from 'sonner';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -21,24 +20,23 @@ import {
     Clock,
     Target,
     User,
+    ExternalLink,
 } from "lucide-react"
 import AddExpense from '@/components/trips/AddExpense';
-import AddCollaboraters from '@/components/trips/InviteCollabrator';
 import InviteCollaborator from '@/components/trips/InviteCollabrator';
 import AddFile from '@/components/trips/AddFile';
-import { url } from 'zod';
-
+import { useNavigate, useParams } from 'react-router-dom';
+import useApi from '@/hooks/useApi';
 
 const TripInfo = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const [dependency, setDependency] = useState(0);
+    const [dependancy, setDependancy] = useState(0);
 
-    const { data: trip, error, loading } = useApi(`/trips/${id}`, {}, [dependency]);
+    const { data: trip, error, loading } = useApi(`/trips/${id}`, {}, [dependancy]);
 
     if (loading) return <Loading text='Loading trip details...' />
-    
 
     const deleteTrip = async () => {
         try {
@@ -50,9 +48,24 @@ const TripInfo = () => {
             toast.error("Some error occured");
         }
     }
-    
 
-    // const deleteFile = async(field)
+    const deleteFile = async (publicId) => {
+        console.log("deleting file", publicId)
+        const parts = publicId.split('/');
+        const fileId = parts[parts.length - 1];
+        try{
+            const response = await api.delete(`/trips/${id}/files/${publicId}`);
+            console.log(response)
+            toast.success("File deleted successfully!");
+            setDependancy(dependancy + 1);
+        }
+        catch(err){
+            console.error(err);
+            toast.error("Some error occured");
+        }
+    }
+
+
 
     const calculateDaysUntilTrip = () => {
         if (!trip) return 0
@@ -67,7 +80,7 @@ const TripInfo = () => {
         if (!trip) return 0
         const startDate = new Date(trip.startDate)
         const endDate = new Date(trip.endDate)
-        const diffTime = endDate.getTime()-startDate.getTime()
+        const diffTime = endDate.getTime() - startDate.getTime()
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
         return diffDays
     }
@@ -91,9 +104,7 @@ const TripInfo = () => {
         } else {
             return false;
         }
-
     }
-
 
     if (error || !trip) {
         return (
@@ -109,10 +120,10 @@ const TripInfo = () => {
         )
     }
 
-    const daysUntilTrip = calculateDaysUntilTrip();
-    const tripDuration = calculateTripDuration();
-    const budgetProgress = getBudgetProgress();
-    const remainingBudget = getRemainingBudget();
+    const daysUntilTrip = calculateDaysUntilTrip()
+    const tripDuration = calculateTripDuration()
+    const budgetProgress = getBudgetProgress()
+    const remainingBudget = getRemainingBudget()
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -135,7 +146,7 @@ const TripInfo = () => {
                                                 Edit Trip
                                             </Button>
                                         </a>
-                                        <Button variant="outline" size="sm" onClick={deleteTrip}>
+                                        <Button variant="outline" size="sm" onClick={deleteTrip} className={"text-red-600 hover:text-red-600 hover:bg-red-50"}>
                                             <Trash2 className="mr-2 h-4 w-4" />
                                             Delete
                                         </Button>
@@ -246,11 +257,11 @@ const TripInfo = () => {
                                     <div>
                                         <h4 className="font-semibold mb-3">Recent Expenses</h4>
                                         <div className="space-y-2">
-                                            {trip.budget.expenses.slice(0, 3).map((expense, index) => (
+                                            {trip.budget.expenses.map((expense, index) => (
                                                 <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                                                     <div>
                                                         <p className="font-medium">{expense.name}</p>
-                                                        <p className="text-sm text-gray-600">{new Date(expense.date).toLocaleDateString()}</p>
+                                                        <p className="text-sm text-gray-600">{new Date(expense.date).toLocaleString()}</p>
                                                     </div>
                                                     <p className="font-semibold">${expense.amount}</p>
                                                 </div>
@@ -266,15 +277,17 @@ const TripInfo = () => {
                                             <Users className="h-5 w-5 text-purple-600" />
                                             <h3 className="text-lg font-semibold">Collaborators</h3>
                                         </div>
-                                        <div className="flex flex-wrap gap-3">
-                                            {trip.collaborators.map((id, index) => (
-                                                <div key={index} className="flex items-center space-x-2 p-2 bg-gray-50 rounded-lg">
-                                                   <div className='p-2 bg-amber-400 rounded-full'>
-                                                    <User className='h-4 w-4 '/>
-
+                                        <div className="grid md:grid-cols-2 gap-3">
+                                            {trip.collaborators.map((member, index) => (
+                                                <div key={index} className="flex items-center space-x-4 p-2 bg-gray-50 rounded-lg">
+                                                    <div className='p-2 bg-amber-400 rounded-full'>
+                                                        <User className='w-4 h-4' />
                                                     </div>
-                                                    <span className="text-sm">{id}</span>
-                                                 </div>
+                                                    <div>
+                                                        <p className="text-sm">{member.name}</p>
+                                                        <span className='text-xs text-gray-400'>{member.email}</span>
+                                                    </div>
+                                                </div>
                                             ))}
                                         </div>
                                     </div>
@@ -318,11 +331,11 @@ const TripInfo = () => {
 
                                             }
 
-                                        )
-                                    } 
-                                        </div>
-                                            </div>
+                                            )
 
+                                            }
+                                        </div>
+                                    </div>
                                 )}
                             </CardContent>
                         </Card>
@@ -353,14 +366,12 @@ const TripInfo = () => {
                         </Card>
 
                         {/* add expense  */}
-                        <AddExpense tripId={id} dependency={dependency} setDependency={setDependency } />
+                        <AddExpense tripId={id} dependancy={dependancy} setDependancy={setDependancy} />
 
-                        {/* invite collaborator */}
+                        {/* invite collaborator  */}
                         <InviteCollaborator tripId={id} />
 
-                        <AddFile tripId={id} dependency={dependency} setDependency={setDependency } />
-
-
+                        <AddFile tripId={id} dependancy={dependancy} setDependancy={setDependancy} />
                     </div>
                 </div>
             </div>
