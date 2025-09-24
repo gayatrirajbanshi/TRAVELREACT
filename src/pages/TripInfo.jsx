@@ -109,10 +109,10 @@ const TripInfo = () => {
         )
     }
 
-    const daysUntilTrip = calculateDaysUntilTrip()
-    const tripDuration = calculateTripDuration()
-    const budgetProgress = getBudgetProgress()
-    const remainingBudget = getRemainingBudget()
+    const daysUntilTrip = calculateDaysUntilTrip();
+    const tripDuration = calculateTripDuration();
+    const budgetProgress = getBudgetProgress();
+    const remainingBudget = getRemainingBudget();
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -274,7 +274,7 @@ const TripInfo = () => {
 
                                                     </div>
                                                     <span className="text-sm">{id}</span>
-                                                </div>
+                                                 </div>
                                             ))}
                                         </div>
                                     </div>
@@ -291,8 +291,12 @@ const TripInfo = () => {
                                             {trip.files.map((file, index) => {
                                                 if (checkImage(file.url)) {
                                                     return (
-                                                        <div key={index}>
+                                                        <div key={index} className='relative'>
                                                             <img src={file.url} alt={file._id} className='w-full' />
+
+                                                            <Button variant="icon" className="absolute top-4 right-4  text-red-600 hover:text-white hover:bg-red-500" onClick={() => deleteFile(file.publicId)}>
+                                                                <Trash2 className="h-4 w-4" />
+                                                            </Button>
                                                         </div>
                                                     )
                                                 }

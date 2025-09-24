@@ -1,5 +1,5 @@
 import React from 'react'
-import { DollarSign, Plus, Upload } from 'lucide-react'
+import { DollarSign, File, Plus, Upload } from 'lucide-react'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -11,16 +11,16 @@ import api from "@/api/axios"
 import { toast } from "sonner"
 import { useNavigate, useSearchParams } from "react-router-dom"
 
-const expenseSchema = z.object({
-    file: z.array(z.file().min(1, "name is required"))
+const fileSchema = z.object({
+    file: z.array(z.file().min(1, "choose at least one file"))
     
 })
 
 
-const AddFile= ({ tripId }) => {
+const AddFile= ({ tripId,dependency,setDependency }) => {
 
     const form = useForm({
-        resolver: zodResolver(expenseSchema),
+        resolver: zodResolver(fileSchema),
         defaultValues: {
             file: "",
            
@@ -30,7 +30,7 @@ const AddFile= ({ tripId }) => {
     const onSubmit = async (data) => {
          console.log(data);
         try {
-             const formData = new FormData();
+             const formData = new FormData();       
              formData.append("files",data.file[0]);
 
 
@@ -58,8 +58,8 @@ const AddFile= ({ tripId }) => {
                 <Card>
                     <CardHeader>
                         <CardTitle className="text-lg flex items-center">
-                            <Upload className="mr-2 h-5 w-5 text-red-600" />
-                            Upload a files
+                            <File className="mr-2 h-5 w-5 text-red-600" />
+                            Add files
                         </CardTitle>
                         <CardDescription>Upload photos,tickets, file, bill and more</CardDescription>
                     </CardHeader>
@@ -74,7 +74,7 @@ const AddFile= ({ tripId }) => {
                                         <Input 
                                         type="file" 
                                         multiple
-                                        onChange={(e) => onChange(e.target.files ? Array.form(e.target.files) : [])}   
+                                        onChange={(e) => onChange(e.target.files ? Array.from(e.target.files) : [])}   
                                         
                                      /> 
                                          {/* it combines all the files in one array */}
@@ -88,7 +88,7 @@ const AddFile= ({ tripId }) => {
                         
 
                         <Button type="submit" className="w-full">
-                            <Plus className="mr-2 h-4 w-4" />
+                            <Upload className="mr-2 h-4 w-4" />
                             Upload
                         </Button>
                     </CardContent>

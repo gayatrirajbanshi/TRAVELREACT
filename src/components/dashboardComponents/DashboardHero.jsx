@@ -4,15 +4,15 @@ import { Button } from '../ui/button'
 const  DashboardHero = () => {
   return (
     <section className='relative flex items-center justify-center text-white'>
-        <div className='absolute top-0 left-0 w-full h-full -z-20 overflow-hidden'>
-            <img src="https://www.bugbog.com/wp-content/uploads/2024/11/48a8e990c7e3a541/budget-travel-destinations.jpeg" alt="background" className='w-full h-full'/>
+        <div className='absolute top-0 left-0 w-full h-full -z-20 overflow-hidden grid place-conent-center'>
+            <img src="https://www.bugbog.com/wp-content/uploads/2024/11/48a8e990c7e3a541/budget-travel-destinations.jpeg" alt="background" className='w-full h-auto'/>
         </div>
 
         <div className='absolute h-full w-full top-0 left-0 bg-black/60 -z-10'>
         </div>
 
         <div className='flex flex-col items-center justify-center text-center gap-6 min-h-[60vh] px-4 max-w-2/3'>
-            <h1 className='text-4xl md:text-5xl fomt-bold'> 
+            <h1 className='text-3xl md:text-5xl fomt-bold'> 
                 Create new trip with Wander Wise
             </h1>
 

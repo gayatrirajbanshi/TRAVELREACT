@@ -42,7 +42,7 @@ const PackingList = ({ selectedTripId }) => {
     try {
       const response = await api.post(`/package-lists/${selectedTripId}`, { name: newItemName });
 
-      if (response.data?._id) {
+      if (response.data?._id) { 
         toast.success("Packing Item added!");
         setDependancy(dependancy+1);
       }

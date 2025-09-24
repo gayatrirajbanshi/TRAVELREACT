@@ -1,11 +1,15 @@
 import DashboardHero from '@/components/dashboardComponents/DashboardHero'
+import TripStatusCard from '@/components/dashboardComponents/TripStatusCard'
+
 import UserTrips from '@/components/dashboardComponents/UserTrips'
+import { Button } from '@/components/ui/button'
 import React from 'react'
 
 const Dashboard = () => {
   return (
-    <main className='py-4 px0-20'>
+    <main className='py-4 px-4 md:px-6 lg:px-20'>
       <DashboardHero/>
+      <TripStatusCard/>
 
       <section>
       <div> 
@@ -14,7 +18,9 @@ const Dashboard = () => {
      </div>
 
      <div>
-      
+      <a href="/trips"><Button variant="outline">
+        Show All
+        </Button></a>
      </div>
 
         

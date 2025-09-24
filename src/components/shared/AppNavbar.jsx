@@ -18,12 +18,31 @@ const AppNavbar = () => {
         <NavLink to="/dashboard" className={({isActive})=> isActive ? 'text-primary font-semibold underline': ''}>Dashboard</NavLink>
         <NavLink to="/trips" className={({isActive})=> isActive ? 'text-primary font-semibold underline': ''}>Trips</NavLink>
         <NavLink to="/itineraries" className={({isActive})=> isActive ? 'text-primary font-semibold underline': ''}>Itineraries</NavLink>
-        <NavLink to="/packing list" className={({isActive})=> isActive ? 'text-primary font-semibold underline': ''}>Packing List</NavLink>
+        <NavLink to="/packing" className={({isActive})=> isActive ? 'text-primary font-semibold underline': ''}>Packing List</NavLink>
      </nav>
      <div> 
        <Button variant="outline" onClick={logout}> Logout</Button>
     </div>
    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
   </header>
   )   
 }

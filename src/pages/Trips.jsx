@@ -4,8 +4,8 @@ import { Plus } from 'lucide-react'
 import React from 'react'
 
 const Trips = () => {
-  return (
-    <main className='py-4 px-20'>
+  return (  
+    <main className='py-4 px-4 md:mx-6 lg:px-20'>
 
     <div> 
       <h1 className='text-3xl font-boldmb-2'>Your Trip</h1>
